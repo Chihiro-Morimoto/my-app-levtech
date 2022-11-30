@@ -12,5 +12,10 @@ class TaskController extends Controller
     {
     return view('tasks/index')->with(['tasks' => $task->getByLimit()]);
     }
+    
+    public function show(Task $task)
+    {
+        return view('tasks/show')->with(['task' => $task]);
+    }
 
 }

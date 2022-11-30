@@ -11,7 +11,9 @@
         <div class="tasks">
             @foreach ($tasks as $task)
                 <div class="task">
-                    <h2 class="task">{{ $task->title }}</h2>
+                    <h2 class="task">
+                        <a href="/tasks/{{ $task->id }}">{{ $task->title }}</a>
+                    </h2>
                     <p class="deadline">期限：{{ $task->deadline }}</p>
                 </div>
             @endforeach
