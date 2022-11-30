@@ -14,4 +14,12 @@ class Task extends Model
     {
         return $this->orderBy('deadline', 'ASC')->limit($limit_count)->get();
     }
+    
+    protected $fillable = [
+        'title',
+        'deadline',
+        'place',
+        'body',
+    ];
+    
 }

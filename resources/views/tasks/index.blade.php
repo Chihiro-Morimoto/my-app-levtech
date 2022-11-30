@@ -9,12 +9,14 @@
     <body>
         <h1>Todoリスト</h1>
         <div class="tasks">
+            <a href="/tasks/create">新規作成</a>
             @foreach ($tasks as $task)
                 <div class="task">
                     <h2 class="task">
                         <a href="/tasks/{{ $task->id }}">{{ $task->title }}</a>
                     </h2>
                     <p class="deadline">期限：{{ $task->deadline }}</p>
+                    <br>
                 </div>
             @endforeach
         </div>

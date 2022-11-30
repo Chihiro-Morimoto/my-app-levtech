@@ -14,6 +14,9 @@
             <p class="body">内容：{{ $task->body }}</p>
         </div>
         <div class="footer">
+            <div class="edit">
+                <a href="/tasks/{{ $task->id }}/edit">編集</a>
+            </div>
             <a href="/tasks">一覧に戻る</a>
         </div>
     </body>
