@@ -43,5 +43,11 @@ class TaskController extends Controller
         $task->fill($input)->save();
         return redirect('/tasks/'.$task->id);
     }
+    
+    public function delete(Task $task)
+    {
+        $task->delete();
+        return redirect('/tasks');
+    }
 
 }
