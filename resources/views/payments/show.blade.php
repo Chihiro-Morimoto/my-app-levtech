@@ -15,6 +15,15 @@
             <div class="memo">メモ：{{ $payment->memo }}</div>
         </div>
         <div class="footer">
+            <div class="edit">
+                <button type="button"><a href="/payments/{{ $payment->id }}/edit">編集</a></button>
+            </div>
+            <form action="/payments/{{ $payment->id }}" id="form_{{ $payment->id }}" method="post">
+                    @csrf
+                    @method('DELETE')
+                    <button type="button" onclick="deletePayment({{ $payment->id }})">削除</button>
+            </form>
+            <br><br>
             <a href="/payments">戻る</a>
         </div>
     </body>

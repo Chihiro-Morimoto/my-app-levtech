@@ -13,4 +13,9 @@ class Usage extends Model
     {
         return $this->hasMany(Payment::class);
     }
+    
+    protected $fillable = [
+        'id',
+        'name'
+    ];
 }

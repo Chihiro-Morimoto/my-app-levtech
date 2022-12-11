@@ -33,4 +33,16 @@ class PaymentController extends Controller
         $payment->fill($input)->save();
         return redirect('/payments/'.$payment->id);
     }
+    
+    public function edit(Payment $payment, Usage $usage)
+    {
+        return view('payments/edit')->with(['payment' => $payment, 'usages' => $usage->get()]);
+    }
+    
+    public function update(PaymentRequest $request, Payment $payment)
+    {
+        $input_payment = $request['payment'];
+        $payment->fill($input_payment)->save();
+        return redirect('/payments/'.$payment->id);
+    }
 }

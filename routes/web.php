@@ -39,6 +39,10 @@ Route::get('/payments', [PaymentController::class, 'index']);
 
 Route::get('/payments/create', [PaymentController::class, 'create']);
 
+Route::get('/payments/{payment}/edit', [PaymentController::class, 'edit']);
+
 Route::get('/payments/{payment}', [PaymentController::class, 'show']);
 
 Route::post('/payments', [PaymentController::class, 'store']);
+
+Route::put('payments/{payment}', [PaymentController::class, 'update']);
