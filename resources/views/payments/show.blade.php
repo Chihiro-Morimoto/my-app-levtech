@@ -10,7 +10,7 @@
     <body>
         <div class="expenditure_detail">
             <h2 class="date">{{ $payment->used_at }}</h2>
-            <div class="expenditure">支出額:{{ $payment->expenditure }}</div>
+            <div class="expenditure">支出額:{{ $payment->expenditure }}円</div>
             <div class="usage">用途：{{ $payment->usage->name}}</div>
             <div class="memo">メモ：{{ $payment->memo }}</div>
         </div>

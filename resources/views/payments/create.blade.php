@@ -7,35 +7,38 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     </head>
     <body>
-        <h1>Todoリスト</h1>
-        <form action="/tasks" method="POST">
+        <h1>支出</h1>
+        <form action="/payments" method="POST">
             @csrf
-            <div class="title">
-                <h2>タイトル</h2>
-                <input type="text" name="task[title]" value="{{ old('task.title') }}"/>
-                <p class="title_error" style="color:red">{{ $errors->first('task.title') }}</p>
+            <div class="date">
+                <h2>日付</h2>
+                <input type="date" name="payment[used_at]" value="{{ old('payment.used_at') }}"/>
+                <p class="date_error" style="color:red">{{ $errors->first('payment.used_at') }}</p>
             </div>
-            <div class="deadline">
-                <h2>期限</h2>
-                <input type="datetime-local" name="task[deadline]" value="{{ old('task.deadline') }}"/>
-                <p class="deadline_error" style="color:red">{{ $errors->first('task.deadline') }}</p>
+            <div class="expenditure">
+                <h2>支出額</h2>
+                <input type="number" name="payment[expenditure]" value="{{ old('payment.expenditure') }}"/>円
+                <p class="expenditure_error" style="color:red">{{ $errors->first('payment.expenditure') }}</p>
             </div>
-            <div class="place">
-                <h2>場所</h2>
-                <input type="text" name="task[place]" value="{{ old('task.place') }}"/>
-                <p class="place_error" style="color:red">{{ $errors->first('task.place') }}</p>
+            <div class="usage">
+                <h2>用途</h2>
+                <select name="payment[usage_id]">
+                    @foreach($usages as $usage)
+                        <option value="{{ $usage->id }}">{{ $usage->name }}</option>
+                        <p class="usage_error" style="color:red">{{ $errors->first('payment.usage_id') }}</p>
+                    @endforeach
+                </select>
             </div>
-            <div class="body">
-                <h2>内容</h2>
-                <textarea name="task[body]">{{ old('task.body') }}</textarea>
-                <p class="body_error" style="color:red">{{ $errors->first('task.body') }}</p>
+            <div class="memo">
+                <h2>メモ</h2>
+                <textarea name="payment[memo]">{{ old('payment.memo') }}</textarea>
+                <p class="memo_error" style="color:red">{{ $errors->first('payment.memo') }}</p>
             </div>
-            <br>
             <input type="submit" value="保存"/>
         </form>
         <br><br>
         <div class="footer">
-            <a href="/tasks">一覧に戻る</a>
+            <a href="/payments">一覧に戻る</a>
         </div>
     </body>
 </html>

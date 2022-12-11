@@ -9,11 +9,12 @@
     <body>
         <h1>支出リスト</h1>
         <div class="payments">
+            <a href="/payments/create">[新規作成]</a>
             @foreach ($payments as $payment)
                 <div class="payment">
                     <p class="date">日付：{{ $payment->used_at }}</p>
                     <p class="expenditure">
-                        <a href="/payments/{{$payment->id}}">支出額：{{ $payment->expenditure }}</a>
+                        <a href="/payments/{{$payment->id}}">支出額：{{ $payment->expenditure }}円</a>
                     </p>
                 </div>
             @endforeach

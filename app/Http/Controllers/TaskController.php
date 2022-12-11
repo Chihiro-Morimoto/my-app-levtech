@@ -50,19 +50,4 @@ class TaskController extends Controller
         $task->delete();
         return redirect('/tasks');
     }
-    
-    public function check(TaskRequest $request, Task $task)
-    {
-        $input = $request->boolean('checked');
-        if($input==true){
-            $input = false;
-        }else{
-            $input = true;
-        }
-        $task->checked->fill($input)->save();
-        return redirect('/tasks');
-        
-        
-    }
-
 }
