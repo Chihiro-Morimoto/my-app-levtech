@@ -12,4 +12,9 @@ class PaymentController extends Controller
     {
         return view('payments/index')->with(['payments' => $payment->get()]);
     }
+    
+    public function show(Payment $payment)
+    {
+        return view('payments/show')->with(['payment' => $payment]);
+    }
 }

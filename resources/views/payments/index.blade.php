@@ -12,7 +12,9 @@
             @foreach ($payments as $payment)
                 <div class="payment">
                     <p class="date">日付：{{ $payment->used_at }}</p>
-                    <p class="deadline">支出額：{{ $payment->expenditure }}</p>
+                    <p class="expenditure">
+                        <a href="/payments/{{$payment->id}}">支出額：{{ $payment->expenditure }}</a>
+                    </p>
                 </div>
             @endforeach
         </div>

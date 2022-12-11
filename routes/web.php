@@ -38,3 +38,5 @@ Route::delete('/tasks/{task}', [TaskController::class, 'delete']);
 Route::post('/tasks/check',[TaskController::class, 'check']);
 
 Route::get('/payments', [PaymentController::class, 'index']);
+
+Route::get('/payments/{payment}', [PaymentController::class, 'show']);
