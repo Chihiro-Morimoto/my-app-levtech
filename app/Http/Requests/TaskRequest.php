@@ -27,7 +27,7 @@ class TaskRequest extends FormRequest
             'task.title' => 'required|string|max:100',
             'task.deadline' => 'nullable|after_or_equal:now',
             'task.place' => 'required|string|max:100',
-            'task.body' => 'required|string|max:400',
+            'task.body' => 'required|string|max:400'
         ];
     }
 }

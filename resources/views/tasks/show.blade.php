@@ -17,13 +17,15 @@
             <div class="edit">
                 <button type="button"><a href="/tasks/{{ $task->id }}/edit">編集</a></button>
             </div>
-             <form action="/tasks/{{ $task->id }}" id="form_{{ $task->id }}" method="post">
+            <form action="/tasks/{{ $task->id }}" id="form_{{ $task->id }}" method="post">
                     @csrf
                     @method('DELETE')
                     <button type="button" onclick="deleteTask({{ $task->id }})">削除</button>
             </form>
+            <br><br>
             <a href="/tasks">一覧に戻る</a>
         </div>
+        
         <script>
             function deleteTask(id){
                 'use strict'
@@ -32,5 +34,14 @@
                 }
             }
         </script>
+        
+        <style>
+            .edit{
+                display:inline-block;
+            }
+            form{
+                display:inline-block;
+            }
+        </style>
     </body>
 </html>

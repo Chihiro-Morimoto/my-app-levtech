@@ -9,15 +9,15 @@
     <body>
         <h1>Todoリスト</h1>
         <div class="tasks">
-            <a href="/tasks/create">新規作成</a>
+            <a href="/tasks/create">[新規作成]</a>
             @foreach ($tasks as $task)
                 <div class="task">
-                    <h2 class="task">
-                        <input class="task_check" type="checkbox">
+                    <p class="title">
+                        <input class="task_check" id="checkbox_{{ $task->id }}" type="checkbox" onclick="checkTask({{ $task->id }})">
                         <a href="/tasks/{{ $task->id }}">{{ $task->title }}</a>
-                    </h2>
+                    </p>
                     <p class="deadline">期限：{{ $task->deadline }}</p>
-                    <form action="/tasks/{{ $task->id }}" id="form_{{ $task->id }}" method="post">
+                    <form action="/tasks/{{ $task->id }}" id="form_{{ $task->id }}" method="post" class="deletButton">
                         @csrf
                         @method('DELETE')
                         <button type="button" onclick="deleteTask({{ $task->id }})">削除</button>
@@ -26,7 +26,12 @@
                 </div>
             @endforeach
         </div>
+        
         <script>
+            function checkTask(id){
+                document.getElementById(`checkbox_${id}`).submit();
+            }
+        
             function deleteTask(id){
                 'use strict'
                 if (confirm('本当に削除しますか？')){
@@ -34,5 +39,20 @@
                 }
             }
         </script>
+        
+        <style>
+            a{
+                text-decoration:none;
+            }
+            .title{
+                display:inline-block;
+            }
+            .deadline{
+                display:inline-block;
+            }
+            form{
+                display:inline-block;
+            }
+        </style>
     </body>
 </html>

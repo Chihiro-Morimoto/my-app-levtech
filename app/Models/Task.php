@@ -15,7 +15,9 @@ class Task extends Model
     use HasFactory;
     
     public function getByLimit(int $limit_count = 20)
+    
     {
+        
         return $this->orderBy('deadline', 'ASC')->limit($limit_count)->get();
     }
     
@@ -24,6 +26,7 @@ class Task extends Model
         'deadline',
         'place',
         'body',
+        'checked'
     ];
     
 }

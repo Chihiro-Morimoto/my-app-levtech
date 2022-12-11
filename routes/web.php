@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\TaskController;
 
+use App\Http\Controllers\PaymentController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,3 +34,7 @@ Route::post('/tasks', [TaskController::class, 'store']);
 Route::put('/tasks/{task}', [TaskController::class, 'update']);
 
 Route::delete('/tasks/{task}', [TaskController::class, 'delete']);
+
+Route::post('/tasks/check',[TaskController::class, 'check']);
+
+Route::get('/payments', [PaymentController::class, 'index']);

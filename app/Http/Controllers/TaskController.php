@@ -28,6 +28,7 @@ class TaskController extends Controller
     public function store(TaskRequest $request, Task $task)
     {
         $input = $request['task'];
+        $input['checked']=false;
         $task->fill($input)->save();
         return redirect('/tasks/'.$task->id);
     }
@@ -48,6 +49,20 @@ class TaskController extends Controller
     {
         $task->delete();
         return redirect('/tasks');
+    }
+    
+    public function check(TaskRequest $request, Task $task)
+    {
+        $input = $request->boolean('checked');
+        if($input==true){
+            $input = false;
+        }else{
+            $input = true;
+        }
+        $task->checked->fill($input)->save();
+        return redirect('/tasks');
+        
+        
     }
 
 }
