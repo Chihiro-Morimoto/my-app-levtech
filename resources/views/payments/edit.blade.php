@@ -26,7 +26,11 @@
                     <h2>用途</h2>
                     <select name="payment[usage_id]">
                         @foreach($usages as $usage)
-                            <option value="{{ $usage->id }}">{{ $usage->name }}</option>
+                            @if($payment->usage_id === $usage->id)
+                                <option value="{{ $usage->id }}" selected>{{ $usage->name }}</option>
+                            @else
+                                <option value="{{ $usage->id }}">{{ $usage->name }}</option>
+                            @endif
                             <p class="usage_error" style="color:red">{{ $errors->first('payment.usage_id') }}</p>
                         @endforeach
                     </select>
