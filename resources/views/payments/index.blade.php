@@ -16,8 +16,24 @@
                     <p class="expenditure">
                         <a href="/payments/{{$payment->id}}">支出額：{{ $payment->expenditure }}円</a>
                     </p>
+                    <form action="/payments/{{ $payment->id }}" id="form_{{ $payment->id }}" method="post" class="deletButton">
+                        @csrf
+                        @method('DELETE')
+                        <button type="button" onclick="deletePayment({{ $payment->id }})">削除</button>
+                    </form>
                 </div>
             @endforeach
         </div>
+        
+        <script>
+            function deletePayment(id){
+                'use strict'
+                
+                if (confirm('削除すると復元できません。\n本当に削除しますか？')){
+                    document.getElementById(`form_${id}`).submit();
+                }
+            }
+        </script>
+        
     </body>
 </html>

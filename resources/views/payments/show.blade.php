@@ -26,5 +26,16 @@
             <br><br>
             <a href="/payments">戻る</a>
         </div>
+        
+        <script>
+            function deletePayment(id){
+                'use strict'
+                
+                if (confirm('削除すると復元できません。\n本当に削除しますか？')){
+                    document.getElementById(`form_${id}`).submit();
+                }
+            }
+        </script>
+        
     </body>
 </html>

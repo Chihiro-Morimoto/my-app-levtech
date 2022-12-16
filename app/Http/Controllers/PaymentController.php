@@ -45,4 +45,10 @@ class PaymentController extends Controller
         $payment->fill($input_payment)->save();
         return redirect('/payments/'.$payment->id);
     }
+    
+    public function delete(Payment $payment)
+    {
+        $payment->delete();
+        return redirect('/payments');
+    }
 }

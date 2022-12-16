@@ -45,4 +45,6 @@ Route::get('/payments/{payment}', [PaymentController::class, 'show']);
 
 Route::post('/payments', [PaymentController::class, 'store']);
 
-Route::put('payments/{payment}', [PaymentController::class, 'update']);
+Route::put('/payments/{payment}', [PaymentController::class, 'update']);
+
+Route::delete('/payments/{payment}', [PaymentController::class, 'delete']);
