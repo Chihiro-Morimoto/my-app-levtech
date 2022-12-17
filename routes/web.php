@@ -6,6 +6,8 @@ use App\Http\Controllers\TaskController;
 
 use App\Http\Controllers\PaymentController;
 
+use App\Http\Controllers\MemoryController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -48,3 +50,5 @@ Route::post('/payments', [PaymentController::class, 'store']);
 Route::put('/payments/{payment}', [PaymentController::class, 'update']);
 
 Route::delete('/payments/{payment}', [PaymentController::class, 'delete']);
+
+Route::get('/memories', [MemoryController::class, 'index']);
