@@ -10,10 +10,11 @@
         <h1>日記</h1>
         <div class="memories">
             @foreach ($memories as $memory)
-                <div class="memory">
-                    <h2 class="title">{{ $memory->created_at->format("Y-m-d") }}：{{ $memory->title }}</h2>
-                    <p class="body">{{ $memory->body }}</p>
-                </div>
+                <h2 class="title">
+                    <a href="/memories/{{ $memory->id }}">
+                    {{ $memory->created_at->format("Y-m-d") }}：{{ $memory->title }}
+                    </a>
+                </h2>
             @endforeach
         </div>
         <div class="paginate">

@@ -12,4 +12,9 @@ class MemoryController extends Controller
     {
         return view('memories/index')->with(['memories' => $memory->getPaginateByLimit()]);
     }
+    
+    public function show(Memory $memory)
+    {
+        return view('memories/show')->with(['memory' => $memory]);
+    }
 }

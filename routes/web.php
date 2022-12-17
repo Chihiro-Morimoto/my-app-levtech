@@ -52,3 +52,5 @@ Route::put('/payments/{payment}', [PaymentController::class, 'update']);
 Route::delete('/payments/{payment}', [PaymentController::class, 'delete']);
 
 Route::get('/memories', [MemoryController::class, 'index']);
+
+Route::get('/memories/{memory}', [MemoryController::class, 'show']);
