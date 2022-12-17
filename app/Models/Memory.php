@@ -13,4 +13,9 @@ class Memory extends Model
     {
         return $this->orderBy('created_at', 'DESC')->paginate($limit_count);
     }
+    
+    protected $fillable = [
+        'title',
+        'body'
+        ];
 }

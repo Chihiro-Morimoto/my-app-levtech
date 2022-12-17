@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Models\Memory;
 
+use App\Http\Requests\MemoryRequest;
+
 class MemoryController extends Controller
 {
     public function index(Memory $memory)
@@ -16,5 +18,17 @@ class MemoryController extends Controller
     public function show(Memory $memory)
     {
         return view('memories/show')->with(['memory' => $memory]);
+    }
+    
+    public function create()
+    {
+        return view('memories/create');
+    }
+    
+    public function store(MemoryRequest $request, Memory $memory)
+    {
+        $input=$request['memory'];
+        $memory->fill($input)->save();
+        return redirect('/memories/'.$memory->id);
     }
 }

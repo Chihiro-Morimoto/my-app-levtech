@@ -8,6 +8,7 @@
     </head>
     <body>
         <h1>日記</h1>
+        <a href="/memories/create">新規作成</a>
         <div class="memories">
             @foreach ($memories as $memory)
                 <h2 class="title">
