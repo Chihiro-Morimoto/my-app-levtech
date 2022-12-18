@@ -43,4 +43,10 @@ class MemoryController extends Controller
         $memory->fill($input_memory)->save();
         return redirect('/memories/'.$memory->id);
     }
+    
+    public function delete(Memory $memory)
+    {
+        $memory->delete();
+        return redirect('/memories');
+    }
 }

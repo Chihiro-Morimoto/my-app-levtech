@@ -16,10 +16,26 @@
                     {{ $memory->created_at->format("Y-m-d") }}：{{ $memory->title }}
                     </a>
                 </h2>
+                <form action="/memories/{{ $memory->id }}" id="form_{{ $memory->id }}" method="post">
+                    @csrf
+                    @method("DELETE")
+                    <button type="button" onclick="deleteMemory({{ $memory->id }})">削除</button>
+                </form>
             @endforeach
         </div>
         <div class="paginate">
             {{ $memories->links() }}
         </div>
+        
+        <script>
+            function deleteMemory(id){
+                "use strict"
+                
+                if(confirm("削除すると復元できません。\n本当に削除しますか？")){
+                    document.getElementById(`form_${id}`).submit();
+                }
+            }
+        </script>
+        
     </body>
 </html>

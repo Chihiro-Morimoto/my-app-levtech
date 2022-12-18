@@ -63,3 +63,4 @@ Route::post('/memories', [MemoryController::class, 'store']);
 
 Route::put('/memories/{memory}', [MemoryController::class, 'update']);
 
+Route::delete('/memories/{memory}', [MemoryController::class, 'delete']);
