@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('place', 50);
             $table->timestamp('deadline');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

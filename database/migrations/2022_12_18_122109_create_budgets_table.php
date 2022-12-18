@@ -13,8 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('tasks', function (Blueprint $table) {
-            $table->softDeletes();
+        Schema::create('budgets', function (Blueprint $table) {
+            $table->id();
+            $table->integer('estimate');
+            $table->integer('balance');
+            $table->integer('saving');
+            $table->integer('total');
+            $table->date('scheduled');
+            $table->timestamps();
+            $table->SoftDeletes();
         });
     }
 
@@ -25,8 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('tasks', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('budgets');
     }
 };
