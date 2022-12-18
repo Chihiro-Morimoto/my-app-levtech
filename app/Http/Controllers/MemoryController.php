@@ -27,8 +27,20 @@ class MemoryController extends Controller
     
     public function store(MemoryRequest $request, Memory $memory)
     {
-        $input=$request['memory'];
+        $input = $request['memory'];
         $memory->fill($input)->save();
+        return redirect('/memories/'.$memory->id);
+    }
+    
+    public function edit(Memory $memory)
+    {
+        return view('memories/edit')->with(['memory' => $memory]);
+    }
+    
+    public function update(MemoryRequest $request, Memory $memory)
+    {
+        $input_memory = $request['memory'];
+        $memory->fill($input_memory)->save();
         return redirect('/memories/'.$memory->id);
     }
 }

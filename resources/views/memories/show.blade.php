@@ -19,7 +19,14 @@
                 <p>{{ $memory->body }}</p>
             </div>
         </div>
+        
         <div class="footer">
+            <div class="edit">
+                <button type="button">
+                    <a href="/memories/{{ $memory->id }}/edit">編集</a>
+                </button>
+            </div>
+            <br>
             <a href="/memories">一覧に戻る</a>
         </div>
     </body>
