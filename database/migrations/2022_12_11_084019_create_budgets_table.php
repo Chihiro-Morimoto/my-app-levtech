@@ -18,11 +18,9 @@ return new class extends Migration
             $table->integer('estimate');
             $table->integer('balance')->nullable();
             $table->integer('saving')->nullable();
-            $table->integer('total')->nullable();
             $table->date('scheduled');
             $table->timestamps();
             $table->SoftDeletes();
-
         });
     }
 

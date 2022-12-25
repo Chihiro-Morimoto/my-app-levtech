@@ -8,6 +8,8 @@ use App\Models\Budget;
 
 use App\Http\Requests\BudgetRequest;
 
+use App\Models\Payment;
+
 class BudgetController extends Controller
 {
     public function index(Budget $budget)
@@ -15,7 +17,7 @@ class BudgetController extends Controller
         return view('budgets/index')->with(['budgets' => $budget->getByLimit()]);
     }
     
-    public function show(Budget $budget)
+    public function show(Budget $budget, Payment $payment)
     {
         return view('budgets/show')->with(['budget' => $budget]);
     }

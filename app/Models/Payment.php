@@ -24,7 +24,7 @@ class Payment extends Model
     
     public function budget()
     {
-        return $this->belongsTo(Budget::class, 'date', 'scheduled');
+        return $this->belongsTo(Budget::class, 'used_at', 'scheduled');
     }
     
     protected $fillable = [

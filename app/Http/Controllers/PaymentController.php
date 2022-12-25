@@ -10,6 +10,8 @@ use App\Models\Payment;
 
 use App\Models\Usage;
 
+use App\Models\Budget;
+
 class PaymentController extends Controller
 {
     public function index(Payment $payment)
@@ -27,9 +29,11 @@ class PaymentController extends Controller
         return view('payments/create')->with(['usages' => $usage->get()]);
     }
     
-    public function store(PaymentRequest $request, Payment $payment)
+    public function store(PaymentRequest $request, Payment $payment, Budget $budget)
     {
         $input = $request['payment'];
+        $input_budget = $budget->where('scheduled', $input['used_at'] )->first();
+        $input['budget_id'] = $input_budget['id'];
         $payment->fill($input)->save();
         return redirect('/payments/'.$payment->id);
     }

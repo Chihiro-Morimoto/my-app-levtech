@@ -16,7 +16,7 @@ class Budget extends Model
     
     public function payments()
     {
-        return $this->hasMany(Payment::class, 'date', 'scheduled');
+        return $this->hasMany(Payment::class, 'used_at', 'scheduled');
     }
     
     public function getByLimit(int $limit_count = 10)
