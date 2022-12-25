@@ -8,6 +8,8 @@ use App\Http\Controllers\PaymentController;
 
 use App\Http\Controllers\MemoryController;
 
+use App\Http\Controllers\BudgetController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -64,3 +66,17 @@ Route::post('/memories', [MemoryController::class, 'store']);
 Route::put('/memories/{memory}', [MemoryController::class, 'update']);
 
 Route::delete('/memories/{memory}', [MemoryController::class, 'delete']);
+
+Route::get('/budgets', [BudgetController::class, 'index']);
+
+Route::get('/budgets/create', [BudgetController::class, 'create']);
+
+Route::get('/budgets/{budget}/edit', [BudgetController::class, 'edit']);
+
+Route::get('/budgets/{budget}', [BudgetController::class, 'show']);
+
+Route::post('/budgets', [BudgetController::class, 'store']);
+
+Route::put('/budgets/{budget}', [BudgetController::class, 'update']);
+
+Route::delete('/budgets/{budget}', [BudgetController::class, 'delete']);

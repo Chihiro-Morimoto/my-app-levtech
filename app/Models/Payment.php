@@ -22,10 +22,16 @@ class Payment extends Model
         return $this->belongsTo(Usage::class);
     }
     
+    public function budget()
+    {
+        return $this->belongsTo(Budget::class, 'date', 'scheduled');
+    }
+    
     protected $fillable = [
         'used_at',
         'expenditure',
         'usage_id',
+        'budget_id',
         'memo'
     ];
 }

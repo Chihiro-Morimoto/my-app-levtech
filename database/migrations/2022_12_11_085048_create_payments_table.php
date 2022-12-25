@@ -17,6 +17,9 @@ return new class extends Migration
             $table->id();
             $table->date('used_at');
             $table->integer('expenditure');
+            $table->string('memo', 500)->nullable();
+            $table->foreignId('usage_id');
+            $table->foreignId('budget_id');
             $table->timestamps();
             $table->softDeletes();
         });

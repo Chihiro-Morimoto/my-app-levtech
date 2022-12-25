@@ -16,12 +16,13 @@ return new class extends Migration
         Schema::create('budgets', function (Blueprint $table) {
             $table->id();
             $table->integer('estimate');
-            $table->integer('balance');
-            $table->integer('saving');
-            $table->integer('total');
+            $table->integer('balance')->nullable();
+            $table->integer('saving')->nullable();
+            $table->integer('total')->nullable();
             $table->date('scheduled');
             $table->timestamps();
             $table->SoftDeletes();
+
         });
     }
 

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('body', 200);
             $table->string('place', 50);
             $table->timestamp('deadline');
+            $table->boolean('checked');
             $table->timestamps();
             $table->softDeletes();
         });
