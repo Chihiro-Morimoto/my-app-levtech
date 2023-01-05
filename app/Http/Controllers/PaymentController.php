@@ -35,6 +35,10 @@ class PaymentController extends Controller
         $input_budget = $budget->where('scheduled', $input['used_at'] )->first();
         $input['budget_id'] = $input_budget['id'];
         $payment->fill($input)->save();
+        $input_budget['balance'] = $input_budget['balance'] - $input['expenditure'];
+        $input_budget['saving'] = $input_budget['balance'] * 100 / $input_budget['estimate'];
+        $budget = $input_budget;
+        $budget->save();
         return redirect('/payments/'.$payment->id);
     }
     
@@ -43,15 +47,26 @@ class PaymentController extends Controller
         return view('payments/edit')->with(['payment' => $payment, 'usages' => $usage->get()]);
     }
     
-    public function update(PaymentRequest $request, Payment $payment)
+    public function update(PaymentRequest $request, Payment $payment, Budget $budget)
     {
         $input_payment = $request['payment'];
+        $input_budget = $budget->where('scheduled', $input_payment['used_at'] )->first();
+        $input_payment['budget_id'] = $input_budget['id'];
+        $input_budget['balance'] = $input_budget['balance'] + $payment['expenditure'] - $input_payment['expenditure'];
         $payment->fill($input_payment)->save();
+        $input_budget['saving'] = $input_budget['balance'] * 100 / $input_budget['estimate'];
+        $budget = $input_budget;
+        $budget->save();
         return redirect('/payments/'.$payment->id);
     }
     
-    public function delete(Payment $payment)
+    public function delete(Payment $payment, Budget $budget)
     {
+        $input_budget = $budget->where('scheduled', $payment['used_at'] )->first();
+        $input_budget['balance'] = $input_budget['balance'] + $payment['expenditure'];
+        $input_budget['saving'] = $input_budget['balance'] * 100 / $input_budget['estimate'];
+        $budget = $input_budget;
+        $budget->save();
         $payment->delete();
         return redirect('/payments');
     }

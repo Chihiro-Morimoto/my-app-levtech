@@ -27,6 +27,8 @@ class Budget extends Model
     protected $fillable = [
         'id',
         'scheduled',
-        'estimate'
+        'estimate',
+        'balance',
+        'saving'
     ];
 }

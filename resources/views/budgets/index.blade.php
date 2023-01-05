@@ -14,7 +14,7 @@
                 <p class="date">
                     <a href="/budgets/{{ $budget->id }}">日付：{{ $budget->scheduled }}</a>
                 </p>
-                <p class="saving">節約率：{{ $budget->saving }}</p>
+                <p class="saving">節約率：{{ $budget->saving }}%</p>
                 <form action="/budgets/{{ $budget->id }}" id="form_{{ $budget->id }}" method="post" class="deletButton">
                     @csrf
                     @method('DELETE')

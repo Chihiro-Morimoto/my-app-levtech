@@ -30,6 +30,8 @@ class BudgetController extends Controller
     public function store(BudgetRequest $request, Budget $budget)
     {
         $input = $request['budget'];
+        $input['balance'] = $input['estimate'];
+        $input['saving'] = $input['balance'] * 100 / $input['estimate'];
         $budget->fill($input)->save();
         return redirect('/budgets/'.$budget->id);
     }
@@ -42,6 +44,8 @@ class BudgetController extends Controller
     public function update(BudgetRequest $request, Budget $budget)
     {
         $input_budget = $request['budget'];
+        $input_budget['balance'] = $budget['balance'] - $budget['estimate'] + $input_budget['estimate'];
+        $input_budget['saving'] = $input_budget['balance'] * 100 / $input_budget['estimate'];
         $budget->fill($input_budget)->save();
         return redirect('/budgets/'.$budget->id);
     }
