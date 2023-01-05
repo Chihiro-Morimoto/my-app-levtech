@@ -28,7 +28,8 @@ class TaskController extends Controller
     public function store(TaskRequest $request, Task $task)
     {
         $input = $request['task'];
-        $input['checked']=false;
+        $input['checked'] = false;
+        $input += ['user_id' => $request->user()->id];
         $task->fill($input)->save();
         return redirect('/tasks/'.$task->id);
     }
@@ -41,6 +42,7 @@ class TaskController extends Controller
     public function update(TaskRequest $request, Task $task)
     {
         $input = $request['task'];
+        $input += ['user_id' => $request->user()->id];
         $task->fill($input)->save();
         return redirect('/tasks/'.$task->id);
     }

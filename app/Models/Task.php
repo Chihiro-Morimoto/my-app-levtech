@@ -19,12 +19,18 @@ class Task extends Model
         return $this->orderBy('deadline', 'ASC')->limit($limit_count)->get();
     }
     
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    
     protected $fillable = [
         'title',
         'deadline',
         'place',
         'body',
-        'checked'
+        'checked',
+        'user_id'
     ];
     
 }

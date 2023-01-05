@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
+
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\TaskController;
@@ -25,58 +27,55 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/tasks', [TaskController::class, 'index']);
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/tasks/create', [TaskController::class, 'create']);
+Route::controller(TaskController::class)->middleware(['auth'])->group(function(){
+    Route::get('/tasks', 'index')->name('tasks.index');
+    Route::get('/tasks/create', 'create')->name('tasks.create');
+    Route::get('/tasks/{task}/edit', 'edit')->name('tasks.edit');
+    Route::get('/tasks/{task}', 'show')->name('tasks.show');
+    Route::post('/tasks', 'store')->name('tasks.store');
+    Route::put('/tasks/{task}', 'update')->name('tasks.update');
+    Route::delete('/tasks/{task}', 'delete')->name('tasks.delete');
+});
 
-Route::get('/tasks/{task}/edit', [TaskController::class, 'edit']);
+Route::controller(PaymentController::class)->middleware(['auth'])->group(function(){
+    Route::get('/payments', 'index')->name('payments.index');
+    Route::get('/payments/create', 'create')->name('payments.create');
+    Route::get('/payments/{payment}/edit', 'edit')->name('payments.edit');
+    Route::get('/payments/{payment}', 'show')->name('payments.show');
+    Route::post('/payments', 'store')->name('payments.store');
+    Route::put('/payments/{payment}', 'update')->name('payments.update');
+    Route::delete('/payments/{payment}', 'delete')->name('payments.delete');
+});
 
-Route::get('/tasks/{task}', [TaskController::class, 'show']);
 
-Route::post('/tasks', [TaskController::class, 'store']);
+Route::controller(MemoryController::class)->middleware(['auth'])->group(function(){
+    Route::get('/memories', 'index')->name('memories.index');
+    Route::get('/memories/create', 'create')->name('memories.create');
+    Route::get('/memories/{memory}/edit', 'edit')->name('memories.edit');
+    Route::get('/memories/{memory}', 'show')->name('memories.show');
+    Route::post('/memories', 'store')->name('memories.store');
+    Route::put('/memories/{memory}', 'update')->name('memories.update');
+    Route::delete('/memories/{memory}', 'delete')->name('memories.delete');
+});
 
-Route::put('/tasks/{task}', [TaskController::class, 'update']);
+Route::controller(BudgetController::class)->middleware(['auth'])->group(function(){
+    Route::get('/budgets', 'index')->name('budgets.index');
+    Route::get('/budgets/create', 'create')->name('budgets.create');
+    Route::get('/budgets/{budget}/edit', 'edit')->name('budgets.edit');
+    Route::get('/budgets/{budget}', 'show')->name('budgets.show');
+    Route::post('/budgets', 'store')->name('budgets.store');
+    Route::put('/budgets/{budget}', 'update')->name('budgets.update');
+    Route::delete('/budgets/{budget}', 'delete')->name('budgets.delete');
+});
 
-Route::delete('/tasks/{task}', [TaskController::class, 'delete']);
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
-Route::get('/payments', [PaymentController::class, 'index']);
-
-Route::get('/payments/create', [PaymentController::class, 'create']);
-
-Route::get('/payments/{payment}/edit', [PaymentController::class, 'edit']);
-
-Route::get('/payments/{payment}', [PaymentController::class, 'show']);
-
-Route::post('/payments', [PaymentController::class, 'store']);
-
-Route::put('/payments/{payment}', [PaymentController::class, 'update']);
-
-Route::delete('/payments/{payment}', [PaymentController::class, 'delete']);
-
-Route::get('/memories', [MemoryController::class, 'index']);
-
-Route::get('/memories/create', [MemoryController::class, 'create']);
-
-Route::get('/memories/{memory}/edit', [MemoryController::class, 'edit']);
-
-Route::get('/memories/{memory}', [MemoryController::class, 'show']);
-
-Route::post('/memories', [MemoryController::class, 'store']);
-
-Route::put('/memories/{memory}', [MemoryController::class, 'update']);
-
-Route::delete('/memories/{memory}', [MemoryController::class, 'delete']);
-
-Route::get('/budgets', [BudgetController::class, 'index']);
-
-Route::get('/budgets/create', [BudgetController::class, 'create']);
-
-Route::get('/budgets/{budget}/edit', [BudgetController::class, 'edit']);
-
-Route::get('/budgets/{budget}', [BudgetController::class, 'show']);
-
-Route::post('/budgets', [BudgetController::class, 'store']);
-
-Route::put('/budgets/{budget}', [BudgetController::class, 'update']);
-
-Route::delete('/budgets/{budget}', [BudgetController::class, 'delete']);
+require __DIR__.'/auth.php';
