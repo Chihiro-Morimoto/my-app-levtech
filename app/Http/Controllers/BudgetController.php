@@ -27,10 +27,11 @@ class BudgetController extends Controller
         return view('/budgets/create');
     }
     
-    public function store(BudgetRequest $request, Budget $budget)
+    public function store(BudgetRequest $request, Budget $budget, Payment $payment)
     {
         $input = $request['budget'];
-        $input['balance'] = $input['estimate'];
+        $input_payment = $payment->where('used_at', $input['scheduled'] )->first();
+        $input['balance'] = $input['estimate'] - $input_payment['expenditure'];
         $input['saving'] = $input['balance'] * 100 / $input['estimate'];
         $budget->fill($input)->save();
         return redirect('/budgets/'.$budget->id);
