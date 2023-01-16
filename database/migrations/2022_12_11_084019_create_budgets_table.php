@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('budgets', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id');
             $table->integer('estimate');
             $table->integer('balance')->nullable();
             $table->integer('saving')->nullable();

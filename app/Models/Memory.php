@@ -19,8 +19,14 @@ class Memory extends Model
         return $this->orderBy('created_at', 'DESC')->paginate($limit_count);
     }
     
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    
     protected $fillable = [
         'title',
-        'body'
+        'body',
+        'user_id'
         ];
 }

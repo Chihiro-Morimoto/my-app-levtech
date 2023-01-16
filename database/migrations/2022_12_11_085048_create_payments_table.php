@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id');
             $table->date('used_at');
             $table->integer('expenditure');
             $table->string('memo', 500)->nullable();

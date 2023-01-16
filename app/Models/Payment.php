@@ -27,11 +27,17 @@ class Payment extends Model
         return $this->belongsTo(Budget::class, 'used_at', 'scheduled');
     }
     
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    
     protected $fillable = [
         'used_at',
         'expenditure',
         'usage_id',
         'budget_id',
-        'memo'
+        'memo',
+        'user_id'
     ];
 }

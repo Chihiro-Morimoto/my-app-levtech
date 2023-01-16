@@ -19,6 +19,11 @@ class Budget extends Model
         return $this->hasMany(Payment::class, 'used_at', 'scheduled');
     }
     
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    
     public function getByLimit(int $limit_count = 10)
     {
         return $this->orderBy('scheduled', 'DESC')->limit($limit_count)->get();
@@ -29,6 +34,7 @@ class Budget extends Model
         'scheduled',
         'estimate',
         'balance',
-        'saving'
+        'saving',
+        'user_id'
     ];
 }

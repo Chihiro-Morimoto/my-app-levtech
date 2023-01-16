@@ -17,6 +17,7 @@ class MemoryController extends Controller
     
     public function show(Memory $memory)
     {
+        $this->authorize('view', $memory);
         return view('memories/show')->with(['memory' => $memory]);
     }
     
@@ -28,24 +29,29 @@ class MemoryController extends Controller
     public function store(MemoryRequest $request, Memory $memory)
     {
         $input = $request['memory'];
+        $input += ['user_id' => $request->user()->id];
         $memory->fill($input)->save();
         return redirect('/memories/'.$memory->id);
     }
     
     public function edit(Memory $memory)
     {
+        $this->authorize('update', $memory);
         return view('memories/edit')->with(['memory' => $memory]);
     }
     
     public function update(MemoryRequest $request, Memory $memory)
     {
+        $this->authorize('update', $memory);
         $input_memory = $request['memory'];
+        $input_memory += ['user_id' => $request->user()->id];
         $memory->fill($input_memory)->save();
         return redirect('/memories/'.$memory->id);
     }
     
     public function delete(Memory $memory)
     {
+        $this->authorize('delete', $memory);
         $memory->delete();
         return redirect('/memories');
     }

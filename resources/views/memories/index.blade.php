@@ -12,17 +12,19 @@
             <a href="/memories/create">新規作成</a>
             <div class="memories">
                 @foreach ($memories as $memory)
-                    <h2 class="title">
-                        <a href="/memories/{{ $memory->id }}">
-                        {{ $memory->created_at->format("Y-m-d") }}：{{ $memory->title }}
-                        </a>
-                    </h2>
-                    <form action="/memories/{{ $memory->id }}" id="form_{{ $memory->id }}" method="post">
-                        @csrf
-                        @method("DELETE")
-                        <button type="button" onclick="deleteMemory({{ $memory->id }})">削除</button>
-                    </form>
-                    <br>
+                    @if(Auth::user()->can('view', $memory))
+                        <h2 class="title">
+                            <a href="/memories/{{ $memory->id }}">
+                            {{ $memory->created_at->format("Y-m-d") }}：{{ $memory->title }}
+                            </a>
+                        </h2>
+                        <form action="/memories/{{ $memory->id }}" id="form_{{ $memory->id }}" method="post">
+                            @csrf
+                            @method("DELETE")
+                            <button type="button" onclick="deleteMemory({{ $memory->id }})">削除</button>
+                        </form>
+                        <br>
+                    @endif
                 @endforeach
             </div>
             <div class="paginate">

@@ -46,4 +46,20 @@ class User extends Authenticatable
     {
         return $this->hasMany(Task::class);
     }
+    
+    public function memories()
+    {
+        return $this->hasMany(Memory::class);
+    }
+    
+    public function budgets()
+    {
+        return $this->hasMany(Budget::class);
+    }
+    
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
+
 }

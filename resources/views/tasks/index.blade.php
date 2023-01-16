@@ -12,19 +12,21 @@
             <div class="tasks">
                 <a href="/tasks/create">[新規作成]</a>
                 @foreach ($tasks as $task)
-                    <div class="task">
-                        <p class="title">
-                            <a href="/tasks/{{ $task->id }}">{{ $task->title }}</a>
-                        </p>
-                        <p class="deadline">期限：{{ $task->deadline }}</p>
-                        <form action="/tasks/{{ $task->id }}" id="form_{{ $task->id }}" method="post" class="deletButton">
-                            @csrf
-                            @method('DELETE')
-                            <button type="button" onclick="deleteTask({{ $task->id }})">削除</button>
-                        </form>
+                    @if(Auth::user()->can('view', $task))
+                        <div class="task">
+                            <p class="title">
+                                <a href="/tasks/{{ $task->id }}">{{ $task->title }}</a>
+                            </p>
+                            <p class="deadline">期限：{{ $task->deadline }}</p>
+                            <form action="/tasks/{{ $task->id }}" id="form_{{ $task->id }}" method="post" class="deletButton">
+                                @csrf
+                                @method('DELETE')
+                                <button type="button" onclick="deleteTask({{ $task->id }})">削除</button>
+                            </form>
+                            <br>
+                        </div>
                         <br>
-                    </div>
-                    <br>
+                    @endif
                 @endforeach
             </div>
         

@@ -17,6 +17,7 @@ class TaskController extends Controller
     
     public function show(Task $task)
     {
+        $this->authorize('view', $task);
         return view('tasks/show')->with(['task' => $task]);
     }
     
@@ -41,6 +42,7 @@ class TaskController extends Controller
     
     public function update(TaskRequest $request, Task $task)
     {
+        $this->authorize('update', $task);
         $input = $request['task'];
         $input += ['user_id' => $request->user()->id];
         $task->fill($input)->save();
@@ -49,6 +51,7 @@ class TaskController extends Controller
     
     public function delete(Task $task)
     {
+        $this->authorize('delete', $task);
         $task->delete();
         return redirect('/tasks');
     }

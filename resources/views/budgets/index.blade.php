@@ -12,16 +12,18 @@
             <div class="budgets">
                 <a href="/budgets/create">[新規作成]</a>
                 @foreach($budgets as $budget)
-                    <p class="date">
-                        <a href="/budgets/{{ $budget->id }}">日付：{{ $budget->scheduled }}</a>
-                    </p>
-                    <p class="saving">節約率：{{ $budget->saving }}%</p>
-                    <form action="/budgets/{{ $budget->id }}" id="form_{{ $budget->id }}" method="post" class="deletButton">
-                        @csrf
-                        @method('DELETE')
-                        <button type="button" onclick="deleteBudget({{ $budget->id }})">削除</button>
-                    </form>
-                    <br>
+                @if(Auth::user()->can('view', $budget))
+                        <p class="date">
+                            <a href="/budgets/{{ $budget->id }}">日付：{{ $budget->scheduled }}</a>
+                        </p>
+                        <p class="saving">節約率：{{ $budget->saving }}%</p>
+                        <form action="/budgets/{{ $budget->id }}" id="form_{{ $budget->id }}" method="post" class="deletButton">
+                            @csrf
+                            @method('DELETE')
+                            <button type="button" onclick="deleteBudget({{ $budget->id }})">削除</button>
+                        </form>
+                        <br>
+                    @endif
                 @endforeach
             </div>
         

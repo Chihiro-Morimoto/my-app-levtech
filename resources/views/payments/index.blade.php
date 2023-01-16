@@ -12,18 +12,20 @@
             <div class="payments">
                 <a href="/payments/create">[新規作成]</a>
                 @foreach ($payments as $payment)
-                    <div class="payment">
-                        <p class="date">日付：{{ $payment->used_at }}</p>
-                        <p class="expenditure">
-                            <a href="/payments/{{$payment->id}}">支出額：{{ $payment->expenditure }}円</a>
-                        </p>
-                        <form action="/payments/{{ $payment->id }}" id="form_{{ $payment->id }}" method="post" class="deletButton">
-                            @csrf
-                            @method('DELETE')
-                            <button type="button" onclick="deletePayment({{ $payment->id }})">削除</button>
-                        </form>
-                    </div>
-                    <br>
+                    @if(Auth::user()->can('view', $payment))
+                        <div class="payment">
+                            <p class="date">日付：{{ $payment->used_at }}</p>
+                            <p class="expenditure">
+                                <a href="/payments/{{$payment->id}}">支出額：{{ $payment->expenditure }}円</a>
+                            </p>
+                            <form action="/payments/{{ $payment->id }}" id="form_{{ $payment->id }}" method="post" class="deletButton">
+                                @csrf
+                                @method('DELETE')
+                                <button type="button" onclick="deletePayment({{ $payment->id }})">削除</button>
+                            </form>
+                        </div>
+                        <br>
+                    @endif
                 @endforeach
             </div>
         
